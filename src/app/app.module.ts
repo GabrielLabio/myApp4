@@ -13,6 +13,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { DetailPage } from '../pages/detail/detail';
 
+import { TelaLoginPage } from '../pages/tela-login/tela-login';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -20,7 +22,8 @@ import { DetailPage } from '../pages/detail/detail';
     ContactPage,
     HomePage,
     TabsPage,
-    DetailPage
+    DetailPage,
+    TelaLoginPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { DetailPage } from '../pages/detail/detail';
     ContactPage,
     HomePage,
     TabsPage,
-    DetailPage
+    DetailPage,
+    TelaLoginPage
   ],
   providers: [
     StatusBar,

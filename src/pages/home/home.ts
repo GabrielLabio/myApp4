@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { DetailPage } from '../detail/detail';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
