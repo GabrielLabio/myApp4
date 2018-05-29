@@ -3,15 +3,33 @@
     <ion-title>
       Contact
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addSong()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+    <ion-item *ngFor="let song of songs | async" (click)="showOptions(song.id, song.title)">
+      {{song.title}}
     </ion-item>
   </ion-list>
 </ion-content>
+
+
+<!--<script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCi2mBNgmAoC6EJL16s9p-HiLT_Y5j7pfM",
+    authDomain: "myapp4-d3dac.firebaseapp.com",
+    databaseURL: "https://myapp4-d3dac.firebaseio.com",
+    projectId: "myapp4-d3dac",
+    storageBucket: "myapp4-d3dac.appspot.com",
+    messagingSenderId: "999293097055"
+  };
+  firebase.initializeApp(config);
+</script>-->

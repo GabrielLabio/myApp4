@@ -20,7 +20,6 @@ export class HomePage {
         text: 'Item ' + i,
         id: i
       });
-
     }
   }
 
@@ -28,7 +27,5 @@ export class HomePage {
     this.navCtrl.push(DetailPage, {
       it: item
     });
-
-
   }
 }

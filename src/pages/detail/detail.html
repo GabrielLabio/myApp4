@@ -7,7 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{item.text}}</ion-title>
+
+    <ion-title>
+      {{item.text}}{{item2.id}}
+
+      <!--
+      &nbsp;
+      <ion-icon ios="md-book" md="md-book"></ion-icon>
+    -->
+    </ion-title>
+
+
   </ion-navbar>
 
 </ion-header>
@@ -15,10 +25,10 @@
 
 <ion-content padding>
 
-  <h2>Welcome #{{item.id}}</h2>
+  Vezes feitas
 
   <p>
-    Great job!
+
   </p>
 
 </ion-content>
