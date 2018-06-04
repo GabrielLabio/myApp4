@@ -22,8 +22,12 @@ import { ExpandableComponent } from '../components/expandable/expandable';
 
 import { ListaBlocos2Page } from '../pages/lista-blocos2/lista-blocos2';
 
+import { CronometroPage } from '../pages/cronometro/cronometro';
+
 // Import the AF2 Module
-//import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule } from "angularfire2";
+import { FIREBASE_CONFIG } from "./app.firebase.config"
+import { AngularFireAuthModule } from "angularfire2/auth";
 //import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // AF2 Settings
@@ -37,6 +41,7 @@ import { ListaBlocos2Page } from '../pages/lista-blocos2/lista-blocos2';
 };*/
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -48,12 +53,14 @@ import { ListaBlocos2Page } from '../pages/lista-blocos2/lista-blocos2';
     TelaLoginPage,
     ListaBlocosPage,
     ExpandableComponent, //Se não colocar esse cara aqui, a ACCORDION LIST NAO FUNCIONA (TELA EM BRANCO)
-    ListaBlocos2Page
+    ListaBlocos2Page,
+    CronometroPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp), //ATENCAO -- NAO SEI SE ESTA VIRGULA DA ALGUM PROBLEMA
-    //AngularFireModule.initializeApp(firebaseConfig), //**EM ANDAMENTO
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),//**EM ANDAMENTO
+    AngularFireAuthModule
     //AngularFireDatabaseModule //**EM ANDAMENTO
   ],
   bootstrap: [IonicApp],
@@ -67,7 +74,8 @@ import { ListaBlocos2Page } from '../pages/lista-blocos2/lista-blocos2';
     TelaLoginPage,
     ListaBlocosPage,
     ExpandableComponent, //Eu tinha deixado comentado e não aconteceu nada, mas vou deixar assim só por precaução
-    ListaBlocos2Page
+    ListaBlocos2Page,
+    CronometroPage
   ],
   providers: [
     StatusBar,

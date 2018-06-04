@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { DetailPage } from '../detail/detail';
+import { DetailPage } from '../detail/detail'; //nao está sendo usada no momento
+
+import { CronometroPage } from '../cronometro/cronometro';
 
 /**
  * Generated class for the ListaBlocos2Page page.
@@ -20,17 +22,17 @@ export class ListaBlocos2Page {
   showLevel1 = null;
   showLevel2 = null;
 
-  pages: any[];
+  items: any[];
   items2: any[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
-    this.pages = [];
+    this.items = [];
     var chr;
     for(let i = 0; i < 15; i++) {
       chr = String.fromCharCode(65 + i);
-      this.pages.push({
-        category: 'Bloco ' + chr,
+      this.items.push({
+        text: 'Bloco ' + chr,
         id: chr
       });
     }
@@ -38,12 +40,11 @@ export class ListaBlocos2Page {
     this.items2 = [];
     for(let i = 1; i < 192; i+=10) {
       this.items2.push({
-        text: 'oi',
         id: i
       });
     }
 
-  }
+  }//constructor
 
   toggleLevel1(idx) {
     if (this.isLevel1Shown(idx)) {
@@ -76,9 +77,10 @@ export class ListaBlocos2Page {
     console.log('ionViewDidLoad ListaBlocos2Page');
   }
 
-  itemSelected(item) {
-    this.navCtrl.push(DetailPage, {
-      it: item
+  itemSelected(item, item2) {
+    this.navCtrl.push(CronometroPage, {
+      it: item,
+      it2: item2
     });
   }
 

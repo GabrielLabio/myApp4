@@ -26,7 +26,7 @@ import { DetailPage } from '../detail/detail';
 
      items: any[];
      items2: any[];
-     itemExpandHeight: number = 1100;
+     itemExpandHeight: number = 1100; //ISSO AQUI É UM PROBLEMA, ESTÁ FICANDO UM ESPAÇÃO NO FIM DA LISTA ACCORDION
 
      constructor(public navCtrl: NavController) {
 

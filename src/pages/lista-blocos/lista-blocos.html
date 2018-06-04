@@ -1,10 +1,3 @@
-<!--
-  Generated template for the ListaBlocosPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 
 <ion-header>
   <ion-navbar>
@@ -17,6 +10,7 @@
 <ion-content>
 
     <ion-list>
+      <!--NOTA: NÃO ESTÁ EXPANDINDO CORRETAMENTE NO MEU CELULAR, NÃO SEI SE É POR CAUSA DO APLICATIVO DO IONIC!!!-->
       <ion-item detail-none (click)="expandItem(item)" ion-item *ngFor="let item of items"> <!--Aqui alterei
         de <button> para <ion-item>, uma vez que a seleção de um botão é prioritária sobre a selecao de um item;
         também, caso eu queira selecionar um botao dentro de outro, a selecao do botao externo sempre sera
@@ -60,53 +54,3 @@
     </ion-list>
 
 </ion-content>
-
-
-
-
-<!--
-<html ng-app="ionicApp">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Ionic Accordion</title>
-
-    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
-    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
-
-  </head>
-
-  <body ng-controller="MyCtrl">
-
-    <ion-header-bar class="bar-positive">
-      <h1 class="title">Accordion List</h1>
-    </ion-header-bar>
-
-    <ion-content>
-
-      <ion-list>
-
-        <div ng-repeat="group in groups">
-
-          <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
-
-			<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
-            &nbsp;
-            Group {{group.name}}
-
-          </ion-item>
-
-          <ion-item class="item-accordion" ng-repeat="item in group.items" ng-show="isGroupShown(group)">
-            {{item}}
-          </ion-item>
-
-        </div>
-
-      </ion-list>
-
-    </ion-content>
-
-  </body>
-</html>
-
--->

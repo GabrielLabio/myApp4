@@ -21,7 +21,7 @@ $app-direction: ltr;
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
+$background-color: #7ECDF4; //é o que faz com que a cor de todas as telas fique azul da cor do Kumon
 
 
 
@@ -34,11 +34,12 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #134050,
-  secondary:  #090700,
-  danger:     #abcdef,
-  light:      #808010,
-  dark:       #131313
+  primary:    #47a4d1,
+  secondary:  #1e76a0,
+  danger:     #bb2124,
+  light:      #c7e9f9,
+  dark:       #021c28,
+  base:       #021c28  //nao sei se serve para alguma coisa; PASSÍVEL DE EXCLUSÃO
 );
 
 
@@ -52,7 +53,7 @@ $colors: (
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
+//$action-sheet-md-background: #7ECDF4;
 
 
 
