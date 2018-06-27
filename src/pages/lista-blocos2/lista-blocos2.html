@@ -10,8 +10,8 @@
 
 <ion-content>
 
-  <!--ESTA LISTA TEM A VANTAGEM DE NÃO TER DEIXADO ESPAÇOS EM BRANDO NO MEU CELULAR-->
-  <ion-list>
+   <!--ESTA LISTA TEM A VANTAGEM DE NÃO TER DEIXADO ESPAÇOS EM BRANDO NO MEU CELULAR-->
+   <ion-list>
     <ion-item *ngFor="let item of items; let i=index" text-wrap (click)="toggleLevel1('idx'+i)" [ngClass]="{active: isLevel1Shown('idx'+i)}">
       <h4>
         {{item.text}}
@@ -22,10 +22,15 @@
         <!--<ion-item *ngFor="let s of p.subs; let i2=index" text-wrap (click)="toggleLevel2('idx'+i+'idx'+i2)" [ngClass]="{active: isLevel2Shown('idx'+i+'idx'+i2)}"> -->
         <ion-item *ngFor="let item2 of items2; let i2=index" text-wrap (click)="itemSelected(item, item2)" [ngClass]="{active: isLevel2Shown('idx'+i+'idx'+i2)}">
 
-
           <h4>
-            {{item.text}}{{item2.id}}
-            <!--
+            
+              {{item.text}}{{item2.id}}        
+              
+              <!--
+                {{displayTime(item, item2, blocosFeitos)}} {{blocosFeitos.(item.id+item2.id).displayTime?blocosFeitos.(item.id+item2.id).displayTime:""}} 
+              -->
+              
+              <!--
             <ion-icon color="success" item-right [name]="isLevel2Shown('idx'+i+'idx'+i2) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
           -->
           </h4>
@@ -43,4 +48,33 @@
       </ion-list>
     </ion-item>
   </ion-list>
+
+  <!--
+    <ion-list>
+    -->
+      <!--TENTATIVAS DE PEGAR INFORMAÇÃO DO BANCO DE DADOS; EM ANDAMENTO-->
+
+      <!--
+        <ion-item *ngFor="let note of itemsO | async"
+        detail-push navPush="EditNotePage" [navParams]="{note:note}">
+          {{note.blocosFeitos}}
+        </ion-item>
+      -->
+
+      <!--
+      <ion-item *ngFor="let note of itemsO | async">
+        {{note.displayTime}}
+      </ion-item>
+    -->
+
+    <!-- <ion-item *ngFor="let blocoFeito of blocosFeitosRef$ | async"> -->
+     <!--   <ion-item *ngFor="let blocoFeito of songsList | async">
+      <h2>{{blocoFeito.displayTime}}</h2>
+
+    </ion-item>
+  -->
+  <!--
+  </ion-list>
+-->
+
 </ion-content>

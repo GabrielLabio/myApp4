@@ -49,6 +49,13 @@ listaBlocos() {
   this.navCtrl.push(ListaBlocos2Page, {});
 }
 
+
+register() {
+  this.navCtrl.push('RegistroPage');
+}
+
+
+
 relatorioDesempenho() {
 
 }

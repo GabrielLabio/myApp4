@@ -1,5 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { ContactPage } from '../contact/contact';
+
+//estou tentando puxar o user que fez sign in
+import { AngularFireAuth } from "angularfire2/auth";
+import { User } from "../../models/user";
+
+//estou tentando gravar o tempo obtido em banco de dados
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+
 
 export interface Timer {
   seconds: number;
@@ -20,14 +29,39 @@ export class CronometroPage {
 
   item: any;
   item2: any;
+  refFinal: any;
+  user = {} as User;
 
   //timeInSeconds: number = 2700;
   initialTimeInSeconds: number = 0;
   timer: Timer;
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
+    
     this.item = navParams.get('it');
     this.item2 = navParams.get('it2');
+
+    //SERVE PARA QUE OBTENHAMOS O E-MAIL DO USUÁRIO LOGADO NO MOMENTO
+    //var user = firebase.auth().currentUser;
+    var user = afAuth.auth.currentUser;
+    if (user) {
+      this.user.email = user.email;
+      this.user.uid = user.uid;
+      //console.log(user.email);
+      //console.log(user.uid);
+      //console.log(user.getIdToken); -- a ver
+    } else {
+      console.log("Nao foi possivel achar usuario corrente.");
+    }
+
+
+
+    //PARA QUE FAÇAMOS A GRAVAÇÃO EM BANCO
+    var db = afDatabase.database;
+    var ref = db.ref("users");
+    this.refFinal = ref.child(user.uid + "/blocosFeitos/" + this.item.id + this.item2.id); //FUNCIONA
+    
+    
   }
 
   confirmar() {
@@ -123,10 +157,32 @@ export class CronometroPage {
     return hoursString + ':' + minutesString + ':' + secondsString;
   }
 
-  //IMPORTANTE
+  //IMPORTANTE -- PRECISAMOS DO E-MAIL DO USUÁRIO LOGADO NO MOMENTO
   gravarTempo() {
+    console.log(this.user.email); //OK
+    console.log(this.user.uid);
+
+    //aqui vamos gravar o tempo gasto pelo aluno. Devemos utilizar o seu e-mail cadastrado para
+    //gravar no "lugar certo" no banco de dados -- a referência já foi feita no 'constructor()'
+    this.refFinal.update({
+      tempoLevado: this.timer.secondsPassed,  //definido como number
+      displayTime: this.timer.displayTime //definido como string
+    });
 
 
+    const confirm = this.alertCtrl.create({
+      title: this.item.text + this.item2.id,
+      message: 'Tempo levado: ' + this.timer.displayTime + '\n' + 'Gravado com sucesso.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            console.log('Ok clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 

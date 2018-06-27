@@ -28,7 +28,8 @@ import { CronometroPage } from '../pages/cronometro/cronometro';
 import { AngularFireModule } from "angularfire2";
 import { FIREBASE_CONFIG } from "./app.firebase.config"
 import { AngularFireAuthModule } from "angularfire2/auth";
-//import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+import { AngularFireDatabaseModule } from 'angularfire2/database'; //EM ANDAMENTO
 
 // AF2 Settings
 /*export const firebaseConfig = {
@@ -60,8 +61,8 @@ import { AngularFireAuthModule } from "angularfire2/auth";
     BrowserModule,
     IonicModule.forRoot(MyApp), //ATENCAO -- NAO SEI SE ESTA VIRGULA DA ALGUM PROBLEMA
     AngularFireModule.initializeApp(FIREBASE_CONFIG),//**EM ANDAMENTO
-    AngularFireAuthModule
-    //AngularFireDatabaseModule //**EM ANDAMENTO
+    AngularFireAuthModule,
+    AngularFireDatabaseModule //**EM ANDAMENTO
   ],
   bootstrap: [IonicApp],
   entryComponents: [
