@@ -9,6 +9,8 @@ import { User } from "../../models/user";
 //estou tentando gravar o tempo obtido em banco de dados
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
+import { IteracoesPage } from '../iteracoes/iteracoes';
+
 
 export interface Timer {
   seconds: number;
@@ -27,19 +29,25 @@ export interface Timer {
 })
 export class CronometroPage {
 
-  item: any;
-  item2: any;
-  refFinal: any;
+  letra: any;
+  num: any;
+
+  refFinal: any; //será a referência para gravação dos dados; ver o 'constructor()' e o método 'gravarTempo()'
   user = {} as User;
 
   //timeInSeconds: number = 2700;
   initialTimeInSeconds: number = 0;
   timer: Timer;
 
+  novaIteracao: any;
+
+  //EM ANDAMENTO
+  dataHoraInicio; 
+
   constructor(private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
     
-    this.item = navParams.get('it');
-    this.item2 = navParams.get('it2');
+    this.letra = navParams.get('it');
+    this.num = navParams.get('it2');
 
     //SERVE PARA QUE OBTENHAMOS O E-MAIL DO USUÁRIO LOGADO NO MOMENTO
     //var user = firebase.auth().currentUser;
@@ -55,11 +63,42 @@ export class CronometroPage {
     }
 
 
+    //FAZENDO QUERY PARA SABER QUAL A PRÓXIMA ITERAÇÃO DE UM BLOCO QUALQUER--
+    // Get a database reference to our posts
+    var db = afDatabase.database;
+    var ref = db.ref("users/" + user.uid + "/blocosFeitos/" + this.letra + "/" + this.num.key + "/iteracoes");
+
+    var ultimaIteracao;
+    var ui;
+
+    ref.orderByKey().limitToLast(1).on("child_added", function(snapshot) {
+      //ultimaIteracao é um objeto JavaScript, contendo o tempo da ultima iteração em seu interior
+      ultimaIteracao = snapshot.val();
+
+      //console.log(ultimaIteracao.key); //dá undefined, porque não existe a chave 'key' dentro de ultimaIteracao
+
+      ui = snapshot.key; //recebe a CHAVE da última iteração ocorrida (a chave é o número da iteração)
+    });
+
+    //console.log(ultimaIteracao.tempo); // SE NECESSÁRIO
+    //console.log(ui); //TESTE
+
+    if (ui == undefined)
+      //var 
+      this.novaIteracao = 1;
+    else
+      //var 
+      this.novaIteracao = parseInt(ui) + 1;
+
+    console.log(this.novaIteracao);
+    //--FIM DA QUERY
 
     //PARA QUE FAÇAMOS A GRAVAÇÃO EM BANCO
     var db = afDatabase.database;
     var ref = db.ref("users");
-    this.refFinal = ref.child(user.uid + "/blocosFeitos/" + this.item.id + this.item2.id); //FUNCIONA
+
+    //adicionando var 'novaIteracao' para poder gravar no lugar correto
+    this.refFinal = ref.child(user.uid + "/blocosFeitos/" + this.letra + "/" + this.num.key + "/iteracoes/" + this.novaIteracao); //FUNCIONA!!!
     
     
   }
@@ -115,6 +154,9 @@ export class CronometroPage {
     this.timer.hasStarted = true;
     this.timer.runTimer = true;
     this.timerTick();
+
+    var dataAtual = new Date(); //current Date and Time
+    //var  = dataAtual.getTime(); //returns timestamp
   }
 
   pauseTimer() {
@@ -164,20 +206,30 @@ export class CronometroPage {
 
     //aqui vamos gravar o tempo gasto pelo aluno. Devemos utilizar o seu e-mail cadastrado para
     //gravar no "lugar certo" no banco de dados -- a referência já foi feita no 'constructor()'
+
+
+    //É aqui que eu quero adicionar: dataHoraInicio, dataHoraTermino, emAndamento, dataTermino
+    var dataAtual = new Date(); //quando não temos argumento no construtor, o objeto fica com a DATA e TEMPO atuais da chamada do construtor 
+    var dataHoraTermino = dataAtual.getTime(); //returns timestamp
+    
+
     this.refFinal.update({
-      tempoLevado: this.timer.secondsPassed,  //definido como number
+      dataHoraTermino: dataHoraTermino,
+      tempo: this.timer.secondsPassed,  //definido como number -- estava 'tempoLevado' mas mudei para 'tempo'
       displayTime: this.timer.displayTime //definido como string
     });
 
 
     const confirm = this.alertCtrl.create({
-      title: this.item.text + this.item2.id,
-      message: 'Tempo levado: ' + this.timer.displayTime + '\n' + 'Gravado com sucesso.',
+      title: 'Bloco ' + this.letra + this.num.key,
+      message: 'Iteração ' + this.novaIteracao + '.<br>Tempo levado: ' + this.timer.displayTime + '.<br>Gravado com sucesso.',
       buttons: [
         {
           text: 'Ok',
           handler: () => {
             console.log('Ok clicked');
+            
+            this.navCtrl.pop();
           }
         }
       ]

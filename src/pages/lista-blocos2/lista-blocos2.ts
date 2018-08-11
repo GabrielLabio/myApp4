@@ -1,33 +1,23 @@
-//import { Component } from '@angular/core';
-
-//import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { DetailPage } from '../detail/detail'; //nao está sendo usada no momento
 
-import { CronometroPage } from '../cronometro/cronometro';
+//import { CronometroPage } from '../cronometro/cronometro';
+import { IteracoesPage } from '../iteracoes/iteracoes';
 
 //estou tentando puxar o user que fez sign in
-import { AngularFireAuth } from "angularfire2/auth";
-//Para acesso aos tempos no banco de dados
-//import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
-//import { FirebaseListObservable } from "angularfire2/database-deprecated";
+//import { AngularFireAuth } from "angularfire2/auth";
 
-import { BlocoFeito } from "../../models/blocoFeito"
-//import { Observable } from 'rxjs/Observable';
+//import { IonicPage } from 'ionic-angular/navigation/ionic-page'; //ACHO QUE NÃO PRECISA
 
 
+//PARA PEGAR A LISTA DO BANCO DE DADOS
+import { Observable } from 'rxjs/Observable'; 
 
-import { Component, Injectable } from '@angular/core';
-/*import { NavController } from 'ionic-angular';*/
-import { IonicPage } from 'ionic-angular/navigation/ionic-page';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-//import { Observable } from 'rxjs';
-//import { map } from 'rxjs/operators';
-//import { Note } from '../../model/note/note.model';
-
-
-@Injectable()
+import 'rxjs/add/operator/map'; /*ou este ou o de baixo, mas TEM QUE IMPORTAR UM DESTES, DO CONTRÁRIO O APP DÁ ERRO (JUL/2018)!!!*/
+//import 'rxjs/Rx';
+import { BlocoExListService } from '../../services/lista-blocoEx.service';
 
 
 @IonicPage()
@@ -41,89 +31,36 @@ export class ListaBlocos2Page {
   items: any[];
   items2: any[];
 
+  letraList: Observable<any[]>;
+  numList: Observable<any[]>;
 
-/*
-  itemsRef: AngularFireList<any>;
-  itemsO: Observable<BlocoFeito[]>;
-  */
+  //private afAuth: AngularFireAuth, //não sei se precisa
+  constructor(public navCtrl: NavController, public navParams: NavParams, private blocoExListService: BlocoExListService) {
 
-  //songsList: AngularFireList<any>;
-  //songs: Observable<any[]>;
-
-  //blocosFeitosRef$: AngularFireList<BlocoFeito[]>;
-  //blocosFeitosRef$: AngularFireList<any>;
-  //blocosFeitos;
-
-  constructor(private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, public navCtrl: NavController, public navParams: NavParams) {
-
-    //SERVE PARA QUE OBTENHAMOS O E-MAIL DO USUÁRIO LOGADO NO MOMENTO
-    
-    var user = afAuth.auth.currentUser;
+    //SERVE PARA QUE OBTENHAMOS O E-MAIL DO USUÁRIO LOGADO NO MOMENTO -- NÃO SEI SE PRECISA
+    /* var user = afAuth.auth.currentUser;
     if (user) {
       console.log(user.uid);
     } else {
       console.log("Nao foi possivel achar usuario corrente.");
-    }
-    
-
-    //this.blocosFeitosRef$ = this.afDatabase.list("users/" + user.uid + "/blocosFeitos");
-
-    //this.songsList = this.afDatabase.list("users/" + user.uid + "/blocosFeitos");
-    //this.songs = this.songsList.valueChanges();
+    } */
 
 
-    /*
-    this.itemsRef = afDatabase.list("users/" + user.uid + "/blocosFeitos");
-    this.itemsO = this.itemsRef.snapshotChanges().pipe(
-      map(changes =>
-         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );
-
-    console.log(this.itemsO);
-    console.log(this.itemsRef);
-    */
-
-    //console.log(this.blocosFeitosRef$);
-
-    //SERVE PARA QUE OBTENHAMOS A LISTA DE TEMPOS GRAVADOS EM BANCO
-    
-    //var db = afDatabase.database;
-    //var ref = db.ref("users/" + user.uid + "/blocosFeitos");
-
-    //this.blocosFeitos = afDatabase.list(ref).valueChanges();
-
-    /*
-    //NÃO É POSSÍVEL PREENCHER UMA VARIÁVEL DE FORA COM O 'snapshot.val()' SEM UTILIZAR "ARROW FUNCTIONS"
-    ref.on("value", function(snapshot) {
-      console.log(snapshot.val());
-      //Preenchendo lista de tempos gravados em banco de dados
-      this.blocosFeitos = snapshot.val();
-      //console.log(this.blocosFeitos);
-    }, function (errorObject) {
-      console.log("A leitura do banco falhou: " + errorObject.code);
+    //para obter as LETRAS do servidor
+    this.letraList = this.blocoExListService.getLetraList()
+    .snapshotChanges()
+    .map(
+    changes => {
+      return changes.map(c => ({
+        key: c.payload.key, ...c.payload.val()
+      }))
     });
-    */
     
-    //MESMO QUE O CÓDIGO ACIMA, PORÉM UTILIZANDO "ARROW FUNCTIONS" PARA PODER PREENCHER O 'this.blocosFeitos'
-    //CORRETAMENTE -- ISSO SE DEVE AO FATO DO CÓDIGO ESTAR RODANDO ASSINCRONAMENTE QUANDO DA CONSULTA DO 
-    //BANCO DE DADOS...
-    
-    /*
-    ref.on("value", (snapshot) => {
 
-      //Preenchendo lista de tempos gravados em banco de dados
-      this.blocosFeitos = snapshot.val();
-      //console.log(this.blocosFeitos);
-      console.log(snapshot.val());
-
-    }, (errorObject) => {
-      console.log("A leitura do banco falhou: " + errorObject.code);
-    });
-    */
     
-    //Preenchendo lista de letras
-    this.items = [];
+    
+    //Preenchendo lista de letras -- ESTATICAMENTE
+    /* this.items = [];
     var chr;
     for(let i = 0; i < 15; i++) {
       chr = String.fromCharCode(65 + i);
@@ -131,7 +68,7 @@ export class ListaBlocos2Page {
         text: 'Bloco ' + chr,
         id: chr
       });
-    }
+    } */
 
     //Preenchendo lista de números
     this.items2 = [];
@@ -201,9 +138,24 @@ export class ListaBlocos2Page {
   }
 
   itemSelected(item, item2) {
-    this.navCtrl.push(CronometroPage, {
+    this.navCtrl.push(IteracoesPage, {
       it: item,
       it2: item2
     });
+  }
+
+  listarNumeros(idx, letra) {
+    if(this.isLevel1Shown(idx)) {
+
+      //para obter os NUMEROS E SUA INFORMACAO DO SERVIDOR
+      this.numList = this.blocoExListService.getNumList(letra)
+      .snapshotChanges()
+      .map(
+      changes => {
+        return changes.map(c => ({
+          key: c.payload.key, ...c.payload.val()
+        }))
+      });
+    }
   }
 }

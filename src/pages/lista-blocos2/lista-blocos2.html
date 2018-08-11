@@ -10,21 +10,27 @@
 
 <ion-content>
 
-   <!--ESTA LISTA TEM A VANTAGEM DE NÃO TER DEIXADO ESPAÇOS EM BRANDO NO MEU CELULAR-->
+   <!--ESTA LISTA TEM A VANTAGEM DE NÃO TER DEIXADO ESPAÇOS EM BRANCO NO MEU CELULAR-->
    <ion-list>
+    <!--
     <ion-item *ngFor="let item of items; let i=index" text-wrap (click)="toggleLevel1('idx'+i)" [ngClass]="{active: isLevel1Shown('idx'+i)}">
+    -->
+
+    <!--Abaixo está funcionando a obtenção das LETRAS do servidor-->
+    <ion-item *ngFor="let letra of letraList | async; let i=index" text-wrap (click)="toggleLevel1('idx'+i);listarNumeros(('idx'+i), letra.key)" [ngClass]="{active: isLevel1Shown('idx'+i)}">
+
       <h4>
-        {{item.text}}
+        Estágio {{letra.key}}
         <ion-icon color="success" item-right [name]="isLevel1Shown('idx'+i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
       </h4>
 
       <ion-list *ngIf="isLevel1Shown('idx'+i)">
         <!--<ion-item *ngFor="let s of p.subs; let i2=index" text-wrap (click)="toggleLevel2('idx'+i+'idx'+i2)" [ngClass]="{active: isLevel2Shown('idx'+i+'idx'+i2)}"> -->
-        <ion-item *ngFor="let item2 of items2; let i2=index" text-wrap (click)="itemSelected(item, item2)" [ngClass]="{active: isLevel2Shown('idx'+i+'idx'+i2)}">
+        <ion-item *ngFor="let num of numList | async; let i2=index" text-wrap (click)="itemSelected(letra.key, num)" [ngClass]="{active: isLevel2Shown('idx'+i+'idx'+i2)}">
 
           <h4>
             
-              {{item.text}}{{item2.id}}        
+              Bloco {{letra.key}}{{num.key}}, {{num.temaBloco}}        
               
               <!--
                 {{displayTime(item, item2, blocosFeitos)}} {{blocosFeitos.(item.id+item2.id).displayTime?blocosFeitos.(item.id+item2.id).displayTime:""}} 
@@ -48,33 +54,5 @@
       </ion-list>
     </ion-item>
   </ion-list>
-
-  <!--
-    <ion-list>
-    -->
-      <!--TENTATIVAS DE PEGAR INFORMAÇÃO DO BANCO DE DADOS; EM ANDAMENTO-->
-
-      <!--
-        <ion-item *ngFor="let note of itemsO | async"
-        detail-push navPush="EditNotePage" [navParams]="{note:note}">
-          {{note.blocosFeitos}}
-        </ion-item>
-      -->
-
-      <!--
-      <ion-item *ngFor="let note of itemsO | async">
-        {{note.displayTime}}
-      </ion-item>
-    -->
-
-    <!-- <ion-item *ngFor="let blocoFeito of blocosFeitosRef$ | async"> -->
-     <!--   <ion-item *ngFor="let blocoFeito of songsList | async">
-      <h2>{{blocoFeito.displayTime}}</h2>
-
-    </ion-item>
-  -->
-  <!--
-  </ion-list>
--->
 
 </ion-content>

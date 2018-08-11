@@ -23,13 +23,17 @@ import { ExpandableComponent } from '../components/expandable/expandable';
 import { ListaBlocos2Page } from '../pages/lista-blocos2/lista-blocos2';
 
 import { CronometroPage } from '../pages/cronometro/cronometro';
+import { IteracoesPage } from '../pages/iteracoes/iteracoes';
 
 // Import the AF2 Module
 import { AngularFireModule } from "angularfire2";
 import { FIREBASE_CONFIG } from "./app.firebase.config"
 import { AngularFireAuthModule } from "angularfire2/auth";
 
-import { AngularFireDatabaseModule } from 'angularfire2/database'; //EM ANDAMENTO
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database'; //EM ANDAMENTO
+
+import { IteracaoListService } from '../services/lista-iteracoes.service';
+import { BlocoExListService } from '../services/lista-blocoEx.service';
 
 // AF2 Settings
 /*export const firebaseConfig = {
@@ -55,7 +59,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database'; //EM ANDAMENT
     ListaBlocosPage,
     ExpandableComponent, //Se não colocar esse cara aqui, a ACCORDION LIST NAO FUNCIONA (TELA EM BRANCO)
     ListaBlocos2Page,
-    CronometroPage
+    //CronometroPage, //Não precisa, pois já tenho o 'cronometro.module.ts'
+    IteracoesPage //Se fizer do outro jeito, dá erro no Ionic Lab quando salva no VS Code 
   ],
   imports: [
     BrowserModule,
@@ -76,12 +81,16 @@ import { AngularFireDatabaseModule } from 'angularfire2/database'; //EM ANDAMENT
     ListaBlocosPage,
     ExpandableComponent, //Eu tinha deixado comentado e não aconteceu nada, mas vou deixar assim só por precaução
     ListaBlocos2Page,
-    CronometroPage
+    //CronometroPage, //Não precisa, pois já tenho o 'cronometro.module.ts'
+    IteracoesPage //Se fizer do outro jeito, dá erro no Ionic Lab quando salva no VS Code 
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AngularFireDatabase, //TEM QUE COLOCAR TAMBÉM, APARENTEMENTE
+    IteracaoListService, //QUALQUER SERVIÇO (PROVIDER) PRECISA SER ADICIONADO AQUI
+    BlocoExListService
   ]
 })
 export class AppModule {}

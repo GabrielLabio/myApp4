@@ -1,0 +1,24 @@
+page-iteracoes {
+
+    .scroll-content{
+        overflow: hidden;
+
+    }
+
+    .top-container {
+        height: calc(100% - 96px);
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+
+    .bottom-button {
+        position: absolute;
+        bottom: 0px;
+        display:block;
+        width: 100%;       
+        margin: 0px !important;
+        height: 80px;
+        
+    }
+
+}
