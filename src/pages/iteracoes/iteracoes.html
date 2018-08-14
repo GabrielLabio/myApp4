@@ -7,15 +7,15 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Iterações do bloco {{letra}}{{num.key}}</ion-title>
+    <ion-title>Bloco {{letra}}{{num.key}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    Iterações do bloco {{letra}}{{num.key}} <br>
-    Tema: {{num.temaBloco}}
+    <div style="margin-left: 16px; margin-right: 8px; margin-top: 10px; font-size: 18px"><strong>Bloco {{letra}}{{num.key}} - {{num.temaBloco}}</strong></div>
+    <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 10px; font-size: 15px">T.P.R.: {{num.tprMin}}~{{num.tprMax}} min/folha</div>
 
     <div id="page-container1" class="top-container">
 
@@ -33,14 +33,15 @@
         </ion-item>
       -->
 
-        <ion-item *ngFor="let iteracao of iteracaoList | async" detail-push (click)="itemSelected(iteracao)">
+        <ion-item *ngFor="let iteracao of iteracaoList | async; let i=index" detail-push (click)="itemSelected(iteracao)">
       <!--Acima, estamos mandando 'note' como um parâmetro que irá ser utilizado 
         pela página 'EditNotePage' (o mais importante dos atributos de 'note' a ser 
         utilizado é o 'note.key', sem ele é impossível realizar uma ATUALIZAÇÃO ou EXCLUSÃO
         de um elemente específico no banco de dados)-->
 
           <!--{{iteracao.key}} serviria para indicar a chave pai de tal elemento; OUTRA PALAVRA NÃO FUNCIONA, TEM QUE SER 'key'-->        
-          {{iteracao.tempo}}
+          <div style="font-size: 16px">{{i+1}}ª tentativa</div>
+          <div item-end style="font-size: 18px"><strong>{{iteracao.displayTime}}</strong></div>
 
         </ion-item>
 

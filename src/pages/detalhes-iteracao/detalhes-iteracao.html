@@ -1,0 +1,56 @@
+<!--
+  Generated template for the DetalhesIteracaoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Bloco {{letra}}{{num.key}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <div style="margin-left: 16px; margin-right: 8px; margin-top: 10px; font-size: 18px"><strong>Bloco {{letra}}{{num.key}} - {{num.temaBloco}}</strong></div>
+    <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px; font-size: 15px">T.P.R.: {{num.tprMin}}~{{num.tprMax}} min/folha</div>
+
+    <ion-card>     
+        <ion-card-content style="font-size: 16px">
+            <strong>{{iteracao.key}}ª tentativa</strong>  
+            <br>
+            <strong>Data de término:</strong> <span>{{dataTermino}}</span>
+            <br>
+            <strong>Tempo:</strong> {{iteracao.displayTime}}  
+        </ion-card-content>  
+    </ion-card>
+
+    <ion-card>     
+        <ion-card-content style="font-size: 16px">
+            <strong>{{num.tprMin*10}}~{{num.tprMax*10}} min/bloco</strong>  
+            <br>
+            <!-- COMO MOSTRAR CORES DIFERENTES DEPENDENDO DA MENSAGEM EXIBIDA??? -->
+            <div [class]="auxAbaixo ? 'secondary' : (auxDentro ? 'verde' : 'amarelo')"><strong>{{mensagemTempo}}</strong></div>
+        </ion-card-content>  
+    </ion-card>
+
+    <ion-card>     
+        <ion-card-content style="font-size: 16px; padding-bottom: 5px">
+            <strong>Feedback do orientador:</strong> <span>{{feedback}}</span>  
+            <br>
+            <strong>Comentário do orientador:</strong> 
+            <br>
+
+            <ion-card class="subcard">     
+              <ion-card-content style="font-size: 16px">
+                <div style="font-size: 16px"><i>{{comentario}}</i></div>  
+              </ion-card-content>  
+            </ion-card>
+
+        </ion-card-content>  
+    </ion-card>
+
+</ion-content>

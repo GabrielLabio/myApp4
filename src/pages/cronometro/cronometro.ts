@@ -41,8 +41,9 @@ export class CronometroPage {
 
   novaIteracao: any;
 
-  //EM ANDAMENTO
-  dataHoraInicio; 
+  //serve para que a alteração em banco de dados só ocorra quando clicar em "Iniciar" e não "Continuar"
+  resume: number = 0;
+
 
   constructor(private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
     
@@ -119,6 +120,15 @@ export class CronometroPage {
           handler: () => {
             console.log('Agree clicked');
 
+            //sobrescreve o que estava antes em banco
+            this.refFinal.set({
+              emAndamento: 1,
+              displayTime: "00:00:00",
+              tempo: 0
+            });
+
+            this.resume = 0; // para que o botão "Iniciar" possa gravar no banco novamente, após ter sido clicado no botão "Reiniciar"
+
             this.initTimer() //o cronometro é reiniciado
           }
         }
@@ -155,15 +165,37 @@ export class CronometroPage {
     this.timer.runTimer = true;
     this.timerTick();
 
-    var dataAtual = new Date(); //current Date and Time
-    //var  = dataAtual.getTime(); //returns timestamp
+    if (this.resume == 0) {
+      var dataAtual = new Date(); //current Date and Time (inicio)
+      var dataHoraInicio  = dataAtual.getTime(); //returns timestamp
+
+      this.refFinal.update({
+        dataHoraInicio: dataHoraInicio,
+        emAndamento: 1,
+        displayTime: "00:00:00", //caso o usuário saia antes de clicar em "Pausar"
+        tempo: 0
+      });
+    }
+    
   }
 
   pauseTimer() {
     this.timer.runTimer = false;
+
+    //É aqui que eu quero adicionar: dataHoraInicio, dataHoraTermino, emAndamento, dataTermino
+    var dataAtual = new Date(); //quando não temos argumento no construtor, o objeto fica com a DATA e TEMPO atuais da chamada do construtor 
+    var dataHoraTermino = dataAtual.getTime(); //returns timestamp
+    
+
+    this.refFinal.update({
+      dataHoraTermino: dataHoraTermino,
+      tempo: this.timer.secondsPassed,  //definido como number -- estava 'tempoLevado' mas mudei para 'tempo'
+      displayTime: this.timer.displayTime //definido como string
+    });
   }
 
   resumeTimer() {
+    this.resume = 1;
     this.startTimer();
   }
 
@@ -207,16 +239,9 @@ export class CronometroPage {
     //aqui vamos gravar o tempo gasto pelo aluno. Devemos utilizar o seu e-mail cadastrado para
     //gravar no "lugar certo" no banco de dados -- a referência já foi feita no 'constructor()'
 
-
-    //É aqui que eu quero adicionar: dataHoraInicio, dataHoraTermino, emAndamento, dataTermino
-    var dataAtual = new Date(); //quando não temos argumento no construtor, o objeto fica com a DATA e TEMPO atuais da chamada do construtor 
-    var dataHoraTermino = dataAtual.getTime(); //returns timestamp
     
-
     this.refFinal.update({
-      dataHoraTermino: dataHoraTermino,
-      tempo: this.timer.secondsPassed,  //definido como number -- estava 'tempoLevado' mas mudei para 'tempo'
-      displayTime: this.timer.displayTime //definido como string
+      emAndamento: 0,
     });
 
 

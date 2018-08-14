@@ -41,13 +41,14 @@ export class IteracoesPage {
 
   //CONTINUAR A PARTIR DAQUI
   itemSelected(iteracao) {
-    /* if() {}
-    this.navCtrl.push(IteracoesPage, {
-      iteracao: iteracao
-    }); */
+    this.navCtrl.push('DetalhesIteracaoPage', {
+      iteracao: iteracao,
+      letra: this.letra,
+      num: this.num
+    });
   }
 
-  ultimaIteracao() {
+  ultimaIteracao() { //JÁ FIZEMOS ISSO NO cronometro.ts
    /*  for (let entry of this.iteracaoList) {
       console.log(entry); // 1, "string", false
   } */
