@@ -7,6 +7,8 @@ import { AngularFireAuth } from "angularfire2/auth";
 
 import { ListaBlocos2Page } from '../lista-blocos2/lista-blocos2';
 
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+
 /**
  * Generated class for the MenuInicialPage page.
  *
@@ -21,10 +23,21 @@ import { ListaBlocos2Page } from '../lista-blocos2/lista-blocos2';
 })
 export class MenuInicialPage {
 
-  constructor(private afAuth: AngularFireAuth, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
+
+  
+
+  constructor(private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase, private toast: ToastController, public navCtrl: NavController, public navParams: NavParams) {
+  
+   
+    
+
   }
 
   ionViewWillLoad() {
+
+    
+    console.log('MenuInicialPage');
+
     this.afAuth.authState.subscribe(data => {
       if (data && data.email && data.uid) {
         this.toast.create({
@@ -43,26 +56,26 @@ export class MenuInicialPage {
         }).present();
       }
     });
+
+    console.log('ionViewWillLoad MenuInicialPage');
   }
 
-listaBlocos() {
-  this.navCtrl.push(ListaBlocos2Page, {});
-}
-
-
-register() {
-  this.navCtrl.push('RegistroPage');
-}
+  listaBlocos() {
+    this.navCtrl.push(ListaBlocos2Page, {});
+  }
 
 
 
-relatorioDesempenho() {
-  //a ser implementado
-}
 
-messenger() {
-  //a ser implementado
-}
+
+
+  relatorioDesempenho() {
+    //a ser implementado
+  }
+
+  messenger() {
+    //a ser implementado
+  }
 
 
 

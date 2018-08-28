@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Registro</ion-title>
+    <ion-title>Cadastrar aluno</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -27,6 +27,16 @@
     <ion-input type="password" [(ngModel)]="user.password"></ion-input>
   </ion-item>
 
-  <button ion-button block color="light" (click)="register(user)">Registrar</button>
+  <ion-item>
+    <ion-label floating color="secondary">Nome do aluno</ion-label>
+    <ion-input type="text" [(ngModel)]="user.nome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating color="secondary">Número de matrícula</ion-label>
+    <ion-input type="text" [(ngModel)]="user.numMatricula"></ion-input>
+  </ion-item>
+
+  <button ion-button block color="light" (click)="register(user)">Cadastrar</button>
 
 </ion-content>

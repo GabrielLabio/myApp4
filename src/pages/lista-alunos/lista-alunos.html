@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Alunos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+      
+    <ion-item *ngFor="let aluno of alunoList | async; let i=index" text-wrap (click)="itemSelected()">
+
+      <div style="font-size: 16px">
+        <strong>Nome:</strong> {{aluno.nome}} 
+        <br>
+        <strong>Número de matrícula:</strong> {{aluno.numMatricula}}        
+      </div>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+
+<!-- <ion-item *ngFor="let iteracao of iteracaoList | async; let i=index" detail-push (click)="itemSelected(iteracao)"> -->
+    <!--Acima, estamos mandando 'note' como um parâmetro que irá ser utilizado 
+      pela página 'EditNotePage' (o mais importante dos atributos de 'note' a ser 
+      utilizado é o 'note.key', sem ele é impossível realizar uma ATUALIZAÇÃO ou EXCLUSÃO
+      de um elemente específico no banco de dados)-->
+
+        <!--{{iteracao.key}} serviria para indicar a chave pai de tal elemento; OUTRA PALAVRA NÃO FUNCIONA, TEM QUE SER 'key'-->        
+        <!-- <div style="font-size: 16px">{{i+1}}ª tentativa</div>
+        <div item-end style="font-size: 18px"><strong>{{iteracao.displayTime}}</strong></div>
+
+      </ion-item> -->

@@ -34,6 +34,10 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 
 import { IteracaoListService } from '../services/lista-iteracoes.service';
 import { BlocoExListService } from '../services/lista-blocoEx.service';
+import { AlunoListService } from '../services/lista-alunos.service';
+
+import {ListaAlunosPage} from "../pages/lista-alunos/lista-alunos";
+
 
 // AF2 Settings
 /*export const firebaseConfig = {
@@ -60,7 +64,8 @@ import { BlocoExListService } from '../services/lista-blocoEx.service';
     ExpandableComponent, //Se não colocar esse cara aqui, a ACCORDION LIST NAO FUNCIONA (TELA EM BRANCO)
     ListaBlocos2Page,
     //CronometroPage, //Não precisa, pois já tenho o 'cronometro.module.ts'
-    IteracoesPage //Se fizer do outro jeito, dá erro no Ionic Lab quando salva no VS Code 
+    IteracoesPage, //Se fizer do outro jeito, dá erro no Ionic Lab quando salva no VS Code 
+    ListaAlunosPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +87,8 @@ import { BlocoExListService } from '../services/lista-blocoEx.service';
     ExpandableComponent, //Eu tinha deixado comentado e não aconteceu nada, mas vou deixar assim só por precaução
     ListaBlocos2Page,
     //CronometroPage, //Não precisa, pois já tenho o 'cronometro.module.ts'
-    IteracoesPage //Se fizer do outro jeito, dá erro no Ionic Lab quando salva no VS Code 
+    IteracoesPage, //Se fizer do outro jeito, dá erro no Ionic Lab quando salva no VS Code 
+    ListaAlunosPage
   ],
   providers: [
     StatusBar,
@@ -90,7 +96,8 @@ import { BlocoExListService } from '../services/lista-blocoEx.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AngularFireDatabase, //TEM QUE COLOCAR TAMBÉM, APARENTEMENTE
     IteracaoListService, //QUALQUER SERVIÇO (PROVIDER) PRECISA SER ADICIONADO AQUI
-    BlocoExListService
+    BlocoExListService,
+    AlunoListService
   ]
 })
 export class AppModule {}
