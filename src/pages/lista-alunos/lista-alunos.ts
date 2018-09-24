@@ -28,6 +28,10 @@ export class ListaAlunosPage {
     
   }
 
+  itemSelected() {
+    this.navCtrl.push('AlunoPage', {});
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaAlunosPage');
   }

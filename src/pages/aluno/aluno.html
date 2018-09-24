@@ -1,0 +1,35 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Aluno</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+  <table align="center">
+    <tr>
+      <td>
+        <button ion-button clear block class="large" color="dark" (click)="editarAluno()">
+          <ion-icon name="document"></ion-icon> Editar
+        </button>
+      </td>
+
+      <td>
+        <button ion-button clear block class="large" color="danger" (click)="excluirAluno()">
+          <ion-icon name="close-circle"></ion-icon> Excluir
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <button ion-button color="primary" block (click)="listaBlocos()">Blocos</button>
+
+  <button ion-button color="secondary" block (click)="relatorioDesempenho()">Rel. desempenho (futuro)</button>
+
+  <button ion-button color="light" block (click)="messenger()">Messenger (futuro)</button>
+
+</ion-content>
