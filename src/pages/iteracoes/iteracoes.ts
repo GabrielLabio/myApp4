@@ -20,6 +20,7 @@ export class IteracoesPage {
 
   letra: any;
   num: any;
+  uid: any;
 
   iteracaoList: Observable<any[]>;
 
@@ -27,8 +28,9 @@ export class IteracoesPage {
 
     this.letra = navParams.get('it');
     this.num = navParams.get('it2');
+    this.uid = navParams.get('uid');
 
-    this.iteracaoList = this.iteracaoListService.getIteracaoList(this.letra, this.num.key)
+    this.iteracaoList = this.iteracaoListService.getIteracaoList(this.letra, this.num.key, this.uid)
     .snapshotChanges()
     .map(
     changes => {
@@ -41,11 +43,22 @@ export class IteracoesPage {
 
   //CONTINUAR A PARTIR DAQUI
   itemSelected(iteracao) {
-    this.navCtrl.push('DetalhesIteracaoPage', {
-      iteracao: iteracao,
-      letra: this.letra,
-      num: this.num
-    });
+
+    if(this.uid !== undefined || this.uid != null) {
+      this.navCtrl.push('FeedbackIteracaoPage', {
+        iteracao: iteracao,
+        letra: this.letra,
+        num: this.num,
+        uid: this.uid
+      });
+    }
+    else {
+      this.navCtrl.push('DetalhesIteracaoPage', {
+        iteracao: iteracao,
+        letra: this.letra,
+        num: this.num
+      });
+    }
   }
 
   ultimaIteracao() { //JÁ FIZEMOS ISSO NO cronometro.ts

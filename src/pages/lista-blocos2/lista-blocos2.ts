@@ -34,8 +34,13 @@ export class ListaBlocos2Page {
   letraList: Observable<any[]>;
   numList: Observable<any[]>;
 
+  uid: any; //serve para que a página de iterações seja populada corretamente, caso estejamos acessando tal página via conta de orientador
+
   //private afAuth: AngularFireAuth, //não sei se precisa
   constructor(public navCtrl: NavController, public navParams: NavParams, private blocoExListService: BlocoExListService) {
+
+    this.uid = navParams.get('uid'); //será 'undefined' caso esta página seja acessada através de uma conta de aluno
+    console.log(this.uid);
 
     //SERVE PARA QUE OBTENHAMOS O E-MAIL DO USUÁRIO LOGADO NO MOMENTO -- NÃO SEI SE PRECISA
     /* var user = afAuth.auth.currentUser;
@@ -140,7 +145,8 @@ export class ListaBlocos2Page {
   itemSelected(item, item2) {
     this.navCtrl.push(IteracoesPage, {
       it: item,
-      it2: item2
+      it2: item2,
+      uid: this.uid
     });
   }
 

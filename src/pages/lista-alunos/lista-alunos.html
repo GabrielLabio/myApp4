@@ -11,7 +11,7 @@
 
   <ion-list>
       
-    <ion-item *ngFor="let aluno of alunoList | async; let i=index" text-wrap (click)="itemSelected()">
+    <ion-item *ngFor="let aluno of alunoList | async; let i=index" text-wrap (click)="itemSelected(aluno.email, aluno.nome, aluno.numMatricula, aluno.key)">
 
       <div style="font-size: 16px">
         <strong>Nome:</strong> {{aluno.nome}} 

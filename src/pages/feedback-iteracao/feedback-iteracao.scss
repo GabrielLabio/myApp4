@@ -1,0 +1,24 @@
+page-feedback-iteracao {
+    .secondary {
+        color: #1b6588;
+    }
+
+    .verde {
+        color: rgb(43, 134, 43);
+    }
+
+    .amarelo {
+        color: rgb(175, 172, 0);
+    }
+
+    .danger {
+        color: #bb2124,
+    }
+
+    .subcard {
+        background-color: #7ECDF4;
+        .ion-item {
+            background-color: transparent;
+        }
+    }
+}

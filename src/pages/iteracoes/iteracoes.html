@@ -51,7 +51,7 @@
 
     </div>
 
-    <button id="page-button2" navPush="CronometroPage" [navParams]="{it: letra,
+    <button *ngIf="uid == undefined" id="page-button2" navPush="CronometroPage" [navParams]="{it: letra,
       it2: num}" ion-button color="primary" block class="bottom-button">
       Cronometrar novo bloco
     </button>

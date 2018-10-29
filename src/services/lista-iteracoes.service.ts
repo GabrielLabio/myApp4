@@ -12,13 +12,20 @@ export class IteracaoListService {
     //do seu projeto do Firebase (Realtime Database)*/
  
     private user;
+    private uid;
 
     constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase) { 
         this.user = afAuth.auth.currentUser;
+        this.uid = this.user.uid;
     }
 
-    getIteracaoList(letra, num) {
-        var iteracaoListRef = this.db.list<any>('users/' + this.user.uid + '/blocosFeitos/' + letra + '/' + num + '/iteracoes');
+    getIteracaoList(letra, num, uid) {
+
+        if(uid != undefined || uid != null) {
+            this.uid = uid;
+        }
+
+        var iteracaoListRef = this.db.list<any>('users/' + this.uid + '/blocosFeitos/' + letra + '/' + num + '/iteracoes');
         return iteracaoListRef;
     }
  

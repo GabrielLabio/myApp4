@@ -1,0 +1,78 @@
+<ion-header>
+
+  <ion-navbar>
+      <ion-title>Bloco {{letra}}{{num.key}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div style="margin-left: 16px; margin-right: 8px; margin-top: 10px; font-size: 18px"><strong>Bloco {{letra}}{{num.key}} - {{num.temaBloco}}</strong></div>
+  <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 0px; font-size: 15px">T.P.R.: {{num.tprMin}}~{{num.tprMax}} min/folha</div>
+
+  <ion-card>     
+    <ion-card-content style="font-size: 14px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+      <strong>{{iteracao.key}}ª tentativa</strong>  
+      <br>
+      <strong>Data de término:</strong> <span>{{dataTermino}}</span>
+      <br>
+      <strong>Tempo:</strong> {{iteracao.displayTime}} 
+      <br>
+      <!-- COMO MOSTRAR CORES DIFERENTES DEPENDENDO DA MENSAGEM EXIBIDA??? -->
+      <div [class]="auxAbaixo ? 'secondary' : (auxDentro ? 'verde' : 'amarelo')"><strong>{{mensagemTempo}}</strong></div> 
+    </ion-card-content>  
+  </ion-card>
+
+  <ion-card>     
+    <ion-card-content style="font-size: 14px; padding-bottom: 5px; padding-top: 5px; padding-right: 5px; padding-left: 5px;">
+
+      <strong>Feedback ao aluno:</strong> <span [class]="feedback=='Corrigido' ? 'verde' : (feedback=='Corrigir' ? 'amarelo' : (feedback=='Refazer' ? 'danger' : ''))">{{feedback}}</span>  
+      <br>
+
+      <ion-list radio-group [(ngModel)]="feedback">
+        <ion-item>
+          <ion-label style="font-size: 16px;"><strong>Corrigido</strong></ion-label>
+          <ion-radio color="verde" value="Corrigido" checked></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label style="font-size: 16px;"><strong>Corrigir</strong></ion-label>
+          <ion-radio color="amarelo" value="Corrigir"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label style="font-size: 16px;"><strong>Refazer</strong></ion-label>
+          <ion-radio color="danger" value="Refazer" [disabled]="isDisabled"></ion-radio>
+        </ion-item>
+      </ion-list>
+
+      
+      
+
+      
+
+    </ion-card-content>  
+  </ion-card>
+
+  <ion-card>      
+    <ion-card-content style="font-size: 14px; padding-bottom: 5px; padding-top: 5px; padding-right: 5px; padding-left: 5px;">
+      <strong>Comentário:</strong> 
+      <br>
+
+      <!-- <div style="font-size: 14px"><i>{{comentario}}</i></div> -->  
+
+      <ion-card class="subcard">      
+        <ion-card-content>
+
+          <ion-textarea style="font-size: 14px" [(ngModel)]="comentario"></ion-textarea>
+
+        </ion-card-content>  
+      </ion-card>
+
+    </ion-card-content>  
+  </ion-card>
+
+  <div style="padding: 10px;">
+    <button ion-button style="margin-bottom: 10%; width: 100%;" color="primary" block (click)="atualizarStatus()">Atualizar Status</button>
+  </div>
+
+</ion-content>

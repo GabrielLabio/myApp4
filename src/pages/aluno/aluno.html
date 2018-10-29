@@ -9,26 +9,25 @@
 
 
 <ion-content padding>
-  
-  <table align="center">
-    <tr>
-      <td>
-        <button ion-button clear block class="large" color="dark" (click)="editarAluno()">
-          <ion-icon name="document"></ion-icon> Editar
-        </button>
-      </td>
 
-      <td>
-        <button ion-button clear block class="large" color="danger" (click)="excluirAluno()">
-          <ion-icon name="close-circle"></ion-icon> Excluir
-        </button>
-      </td>
-    </tr>
-  </table>
+  <div style="margin-left: 5px; margin-right: 8px; margin-top: 10px; font-size: 18px"><strong>Aluno(a): {{nome}}</strong></div>
+  <div style="margin-left: 5px; margin-right: 20px; margin-bottom: 0; font-size: 15px">Número de matrícula: {{numMatricula}}</div>
+  <div style="margin-left: 5px; margin-right: 20px; margin-bottom: 10px; font-size: 15px">E-mail: {{email}}</div>
 
-  <button ion-button color="primary" block (click)="listaBlocos()">Blocos</button>
+  <div style="margin-bottom: 15%;">
+    <button ion-button clear style="padding-left: 0px; padding-right: 0px; height: auto; margin-top: 0px;" class="large" color="dark" (click)="editarAluno()">
+      <ion-icon name="document"></ion-icon> Editar
+    </button>
 
-  <button ion-button color="secondary" block (click)="relatorioDesempenho()">Rel. desempenho (futuro)</button>
+    <button ion-button clear style="padding-left: 0px; height: auto; margin-top: 0px;" class="large" color="danger" (click)="excluirAluno()">
+      <ion-icon name="close-circle"></ion-icon> Excluir
+    </button>
+  </div>
+
+
+  <button ion-button style="margin-bottom: 10%;" color="primary" block (click)="listaBlocos()">Blocos do Aluno</button>
+
+  <button ion-button style="margin-bottom: 10%;" color="secondary" block (click)="relatorioDesempenho()">Rel. desempenho (futuro)</button>
 
   <button ion-button color="light" block (click)="messenger()">Messenger (futuro)</button>
 

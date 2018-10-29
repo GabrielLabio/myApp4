@@ -28,8 +28,13 @@ export class ListaAlunosPage {
     
   }
 
-  itemSelected() {
-    this.navCtrl.push('AlunoPage', {});
+  itemSelected(email, nome, numMatricula, uid) {
+    this.navCtrl.push('AlunoPage', {
+      email: email,
+      nome: nome,
+      numMatricula: numMatricula,
+      uid: uid
+    });
   }
 
   ionViewDidLoad() {
