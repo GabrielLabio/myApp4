@@ -14,7 +14,7 @@
   <div style="margin-left: 5px; margin-right: 20px; margin-bottom: 0; font-size: 15px">Número de matrícula: {{numMatricula}}</div>
   <div style="margin-left: 5px; margin-right: 20px; margin-bottom: 10px; font-size: 15px">E-mail: {{email}}</div>
 
-  <div style="margin-bottom: 15%;">
+  <div style="margin-bottom: 20px;">
     <button ion-button clear style="padding-left: 0px; padding-right: 0px; height: auto; margin-top: 0px;" class="large" color="dark" (click)="editarAluno()">
       <ion-icon name="document"></ion-icon> Editar
     </button>
@@ -25,9 +25,11 @@
   </div>
 
 
-  <button ion-button style="margin-bottom: 10%;" color="primary" block (click)="listaBlocos()">Blocos do Aluno</button>
+  <button ion-button style="margin-bottom: 10px;" color="primary" block (click)="listaBlocos()">Blocos do Aluno</button>
 
-  <button ion-button style="margin-bottom: 10%;" color="secondary" block (click)="relatorioDesempenho()">Rel. desempenho (futuro)</button>
+  <button ion-button style="margin-bottom: 10px;" color="light" block (click)="sendEmail()">Enviar E-mail ao Aluno</button>
+
+  <button ion-button style="margin-bottom: 10px;" color="secondary" block (click)="relatorioDesempenho()">Rel. desempenho (futuro)</button>
 
   <button ion-button color="light" block (click)="messenger()">Messenger (futuro)</button>
 

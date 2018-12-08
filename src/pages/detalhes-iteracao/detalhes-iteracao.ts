@@ -26,8 +26,8 @@ export class DetalhesIteracaoPage {
   auxDentro: number = 0;
 
   feedback: any;
-
   comentario: any;
+  colorFeedback: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     
@@ -68,9 +68,21 @@ export class DetalhesIteracaoPage {
     //tratamento do feedback do orientador
     if (this.iteracao.statusFeedback == undefined || this.iteracao.statusFeedback == null) {
       this.feedback = 'Não avaliado';
+      this.colorFeedback = 'none';
     }
     else {
+
       this.feedback = this.iteracao.statusFeedback;
+      
+      if(this.feedback == 'Corrigir') {
+        this.colorFeedback = 'amarelo';
+      }
+      else if(this.feedback == 'Corrigido') {
+        this.colorFeedback = 'verde';
+      }
+      else if(this.feedback == 'Refazer') {
+        this.colorFeedback = 'danger';
+      }
     }
 
     //tratamento do comentário do orientador

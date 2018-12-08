@@ -39,17 +39,22 @@ export class IteracoesPage {
       }))
     });
 
+    console.log(this.iteracaoList);
+    console.log(this.iteracaoListService.getIteracaoList(this.letra, this.num.key, this.uid));
+
   }
 
   //CONTINUAR A PARTIR DAQUI
   itemSelected(iteracao) {
 
-    if(this.uid !== undefined || this.uid != null) {
+    if(this.uid !== undefined || this.uid != null) { //orientador
       this.navCtrl.push('FeedbackIteracaoPage', {
         iteracao: iteracao,
         letra: this.letra,
         num: this.num,
-        uid: this.uid
+        uid: this.uid,
+        //pra poder gravar o feedback no database
+        iteracaoListRef: this.iteracaoListService.getIteracaoList(this.letra, this.num.key, this.uid) 
       });
     }
     else {

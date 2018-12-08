@@ -28,15 +28,17 @@ export class IteracaoListService {
         var iteracaoListRef = this.db.list<any>('users/' + this.uid + '/blocosFeitos/' + letra + '/' + num + '/iteracoes');
         return iteracaoListRef;
     }
+
+    //getReferenciaIteracao -- CASO NÃO FUNCIONE O QUE EU VOU TENTAR (updateIteracao())
  
     
     addIteracao(iteracao: any, iteracaoListRef) { //TESTE: TROCANDO Note por any => DÁ NA MESMA (NÃO MUDA NADA)
         return iteracaoListRef.push(iteracao);
     }
  
-    
-    updateIteracao(iteracao: any, iteracaoListRef) { //TESTE: TROCANDO Note por any => DÁ NA MESMA (NÃO MUDA NADA)
-        return iteracaoListRef.update(iteracao.key, iteracao); //IMPORTANTE: 'note.key': no caso de não haver uma chave 'key' no mesmo nível, ao se dar o 'update()' é criada tal chave, possuindo como conteúdo o nome da chave pai
+    //Abaixo foi modificado para que apenas uma parte da 'iteracao' sofra o update, e não ela toda
+    updateIteracao(iteracao: any, mod, iteracaoListRef) { //TESTE: TROCANDO Note por any => DÁ NA MESMA (NÃO MUDA NADA)
+        return iteracaoListRef.update(iteracao.key, mod); //IMPORTANTE: 'note.key': no caso de não haver uma chave 'key' no mesmo nível, ao se dar o 'update()' é criada tal chave, possuindo como conteúdo o nome da chave pai
     }
  
     

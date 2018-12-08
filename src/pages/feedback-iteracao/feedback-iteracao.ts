@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+
+import { IteracaoListService } from '../../services/lista-iteracoes.service';
 
 @IonicPage()
 @Component({
@@ -19,14 +21,16 @@ export class FeedbackIteracaoPage {
   auxDentro: number = 0;
 
   feedback: any;
-
   comentario: any;
+  iteracaoListRef: any;
+  mod: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private iteracaoListService: IteracaoListService, public alertCtrl: AlertController) {
 
     this.iteracao = navParams.get('iteracao');
     this.letra = navParams.get('letra');
     this.num = navParams.get('num');
+    this.iteracaoListRef = navParams.get('iteracaoListRef');
 
     if (this.iteracao.emAndamento) {
       //data de término
@@ -77,7 +81,28 @@ export class FeedbackIteracaoPage {
   } //construtor
 
   atualizarStatus() {
-    
+
+    this.mod = {
+      statusFeedback: this.feedback,
+      comentarioOrientador: this.comentario
+    }
+
+    this.iteracaoListService.updateIteracao(this.iteracao, this.mod, this.iteracaoListRef);
+
+    //janela de alerta informando que a operação foi realizada com sucesso
+    const confirm = this.alertCtrl.create({
+      title: 'Atualização bem-sucedida',
+      message: 'A atualização do status do bloco de exercícios foi realizada com sucesso.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            console.log('Ok clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   ionViewDidLoad() {

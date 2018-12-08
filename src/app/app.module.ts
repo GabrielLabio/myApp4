@@ -38,6 +38,8 @@ import { AlunoListService } from '../services/lista-alunos.service';
 
 import {ListaAlunosPage} from "../pages/lista-alunos/lista-alunos";
 
+import { EmailComposer } from '@ionic-native/email-composer';
+
 
 // AF2 Settings
 /*export const firebaseConfig = {
@@ -97,7 +99,8 @@ import {ListaAlunosPage} from "../pages/lista-alunos/lista-alunos";
     AngularFireDatabase, //TEM QUE COLOCAR TAMBÉM, APARENTEMENTE
     IteracaoListService, //QUALQUER SERVIÇO (PROVIDER) PRECISA SER ADICIONADO AQUI
     BlocoExListService,
-    AlunoListService
+    AlunoListService,
+    EmailComposer
   ]
 })
 export class AppModule {}

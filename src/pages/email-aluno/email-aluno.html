@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>emailAluno</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div padding>
+      <ion-item>
+        <ion-label color="dark" stacked>Para</ion-label>
+        <ion-input [(ngModel)]="to" type="text" value="{{email}}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="dark" stacked>Assunto</ion-label>
+        <ion-input [(ngModel)]="subject" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="dark" stacked>Conteúdo</ion-label>
+        <ion-input [(ngModel)]="body" type="text"></ion-input>
+      </ion-item>
+
+    <button ion-button block (click)="send()">Enviar</button>
+  </div>
+</ion-content>
